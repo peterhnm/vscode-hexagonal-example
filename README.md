@@ -1,71 +1,77 @@
-# vscode-hexagonal README
+<div id="top"></div>
 
-This is the README for your extension "vscode-hexagonal". After writing up a brief description, we recommend including the following sections.
+<!-- PROJECT SHIELDS -->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+<!-- END OF PROJECT SHIELDS -->
 
-## Features
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+    <a href="#">
+        <img src="images/content-creator.png" alt="Image" height="180">
+    </a>
+    <h3>My Template Repository</h3>
+    <p>
+        <i>Template repository for new empty repositories.</i>
+        <br />
+        <a href="https://github.com/peterhnm/template_empty_repo/issues">Report Bug</a>
+        ·
+        <a href="https://github.com/peterhnm/template_empty_repo/pulls">Request Feature</a>
+    </p>
+</div>
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## About The Project
 
-For example if there is an image subfolder under your extension project workspace:
 
-\!\[feature X\]\(images/feature-x.png\)
+### Built With
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+* [Icon](https://www.flaticon.com/free-icon/content-creator_6404968?term=image&page=1&position=25&origin=search&related_id=6404968) created by [juicy_fish](https://www.flaticon.com/authors/juicy-fish) 
 
-## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Getting started
 
-## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+## Documentation
 
-For example:
 
-This extension contributes the following settings:
+## Contributing
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-## Known Issues
+If you have a suggestion that would make this better, please open an issue with the tag "enhancement", fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Please use semantic commit messages as described in [here](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716).  
+Don't forget to give the project a star! Thanks again!
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+1. Open an issue with the tag "enhancement"
+2. Fork the Project
+3. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+4. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+5. Push to the Branch (`git push origin feature/AmazingFeature`)
+6. Open a Pull Request
 
-## Release Notes
 
-Users appreciate release notes as you update your extension.
+## License
 
-### 1.0.0
+Distributed under this [license](LICENSE).
 
-Initial release of ...
 
-### 1.0.1
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/peterhnm/<repo-name>.svg?style=for-the-badge
+[contributors-url]: https://github.com/peterhnm/<repo-name>/graphs/contributors
 
-Fixed issue #.
+[forks-shield]: https://img.shields.io/github/forks/peterhnm/<repo-name>.svg?style=for-the-badge
+[forks-url]: https://github.com/peterhnm/<repo-name>/network/members
 
-### 1.1.0
+[stars-shield]: https://img.shields.io/github/stars/peterhnm/<repo-name>.svg?style=for-the-badge
+[stars-url]: https://github.com/peterhnm/<repo-name>/stargazers
 
-Added features X, Y, and Z.
+[issues-shield]: https://img.shields.io/github/issues/peterhnm/<repo-name>.svg?style=for-the-badge
+[issues-url]: https://github.com/peterhnm/<repo-name>/issues
 
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+[license-shield]: https://img.shields.io/github/license/peterhnm/<repo-name>.svg?style=for-the-badge
+[license-url]: https://github.com/peterhnm/<repo-name>/blob/main/LICENSE
