@@ -38,6 +38,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["glob", "npm:10.3.4"],\
             ["mocha", "npm:10.2.0"],\
             ["prettier", "npm:3.0.3"],\
+            ["reflect-metadata", "npm:0.1.13"],\
+            ["tsyringe", "npm:4.8.0"],\
             ["typescript", "patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"]\
           ],\
           "linkType": "SOFT"\
@@ -2407,6 +2409,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["reflect-metadata", [\
+        ["npm:0.1.13", {\
+          "packageLocation": "./.yarn/cache/reflect-metadata-npm-0.1.13-c525998e20-798d379a7b.zip/node_modules/reflect-metadata/",\
+          "packageDependencies": [\
+            ["reflect-metadata", "npm:0.1.13"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["require-directory", [\
         ["npm:2.1.1", {\
           "packageLocation": "./.yarn/cache/require-directory-npm-2.1.1-8608aee50b-fb47e70bf0.zip/node_modules/require-directory/",\
@@ -2766,6 +2777,25 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["tslib", [\
+        ["npm:1.14.1", {\
+          "packageLocation": "./.yarn/cache/tslib-npm-1.14.1-102499115e-dbe628ef87.zip/node_modules/tslib/",\
+          "packageDependencies": [\
+            ["tslib", "npm:1.14.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["tsyringe", [\
+        ["npm:4.8.0", {\
+          "packageLocation": "./.yarn/cache/tsyringe-npm-4.8.0-46e84e25f3-6bf13235cc.zip/node_modules/tsyringe/",\
+          "packageDependencies": [\
+            ["tsyringe", "npm:4.8.0"],\
+            ["tslib", "npm:1.14.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["type-check", [\
         ["npm:0.4.0", {\
           "packageLocation": "./.yarn/cache/type-check-npm-0.4.0-60565800ce-ec688ebfc9.zip/node_modules/type-check/",\
@@ -2848,6 +2878,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["glob", "npm:10.3.4"],\
             ["mocha", "npm:10.2.0"],\
             ["prettier", "npm:3.0.3"],\
+            ["reflect-metadata", "npm:0.1.13"],\
+            ["tsyringe", "npm:4.8.0"],\
             ["typescript", "patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"]\
           ],\
           "linkType": "SOFT"\

@@ -2,6 +2,7 @@
     "name": "vscode-hexagonal",
     "displayName": "vscode-hexagonal",
     "description": "Template for hexagonal architecture in VS Code Plugins.",
+    "packageManager": "yarn@3.6.3",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.81.0"
@@ -10,7 +11,7 @@
         "Other"
     ],
     "activationEvents": [],
-    "main": "./out/extension.js",
+    "main": "./dist/extension.js",
     "contributes": {
         "commands": [
             {
@@ -40,5 +41,8 @@
         "prettier": "3.0.3",
         "typescript": "^5.1.6"
     },
-    "packageManager": "yarn@3.6.3"
+    "dependencies": {
+        "reflect-metadata": "^0.1.13",
+        "tsyringe": "^4.8.0"
+    }
 }

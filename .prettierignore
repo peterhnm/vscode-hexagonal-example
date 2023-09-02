@@ -7,6 +7,7 @@
 /dist
 /node_modules
 **/.pnp*
+**/.yarn/
 
 package-lock.json
 CODE_OF_CONDUCT.md
