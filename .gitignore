@@ -1,0 +1,19 @@
+out
+dist
+node_modules
+
+# idea
+**/.idea
+
+# vscode
+.vscode-test/
+*.vsix
+
+# yarn zero installs
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
