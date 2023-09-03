@@ -13,4 +13,8 @@ export class DocumentAdapter implements DocumentPort {
 
         return Promise.resolve(workspace.applyEdit(edit));
     }
+
+    save(document: TextDocument): Promise<boolean> {
+        return Promise.resolve(document.save());
+    }
 }

@@ -17,7 +17,7 @@ export class SyncDocumentService implements SyncDocumentUseCase {
                 syncDocumentQuery.content,
             )
         ) {
-            return true;
+            return await this.documentPort.save(syncDocumentQuery.document);
         }
         // TODO: Handle error
         return false;

@@ -31,7 +31,7 @@ export class SyncDocumentQuery {
     }
 
     private validate(message: WebviewMessage<any>): boolean {
-        return false;
+        return true;
     }
 
     private mapMessageToContent(message: WebviewMessage<any>): void {

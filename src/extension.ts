@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { ExtensionContext, window } from "vscode";
 import { container } from "tsyringe";
 
@@ -7,6 +8,7 @@ import { TextEditorAdapter } from "adapter/in/TextEditorAdapter";
 export function activate(context: ExtensionContext) {
     config();
     const editor = new TextEditorAdapter(
+        context.extensionUri,
         container.resolve("SyncWebviewUseCase"),
         container.resolve("SyncDocumentUseCase"),
     );

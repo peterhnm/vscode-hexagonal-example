@@ -11,35 +11,47 @@
         "Other"
     ],
     "activationEvents": [],
-    "main": "./dist/extension.js",
+    "main": "./dist/main.js",
     "contributes": {
-        "commands": [
+        "customEditors": [
             {
-                "command": "vscode-hexagonal.helloWorld",
-                "title": "Hello World"
+                "viewType": "vscode-hexagonal-example",
+                "displayName": "Hexagonal Editor",
+                "selector": [
+                    {
+                        "filenamePattern": "*.hex"
+                    }
+                ]
             }
         ]
     },
     "scripts": {
         "vscode:prepublish": "yarn run compile",
         "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
         "pretest": "yarn run compile && yarn run lint",
         "lint": "eslint src --ext ts",
-        "test": "node ./out/test/runTest.js"
+        "test": "node ./out/test/runTest.js",
+        "esbuild": "esbuild ./src/extension.ts --bundle --outfile=dist/main.js --external:vscode --format=cjs --platform=node",
+        "vite": "vite build --config src/webview/vite.config.js",
+        "build": "npm run esbuild -- --minify && npm run vite -- --minify esbuild",
+        "dev": "conc -c \"cyan,yellow\" \"npm run esbuild -- --sourcemap --watch\" \"npm run vite -- --sourcemap true --watch\""
     },
     "devDependencies": {
         "@types/mocha": "^10.0.1",
         "@types/node": "16.x",
         "@types/vscode": "^1.81.0",
+        "@types/vscode-webview": "^1.57.2",
         "@typescript-eslint/eslint-plugin": "^6.4.1",
         "@typescript-eslint/parser": "^6.4.1",
         "@vscode/test-electron": "^2.3.4",
+        "concurrently": "8.2.1",
+        "esbuild": "0.19.2",
         "eslint": "^8.47.0",
         "glob": "^10.3.3",
         "mocha": "^10.2.0",
         "prettier": "3.0.3",
-        "typescript": "^5.1.6"
+        "typescript": "^5.1.6",
+        "vite": "4.4.9"
     },
     "dependencies": {
         "reflect-metadata": "^0.1.13",

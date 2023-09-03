@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import { container, Lifecycle } from "tsyringe";
 import { DocumentAdapter, LoggerAdapter, WebviewAdapter } from "adapter/out";
 import { SyncWebviewService } from "./application/domain/service/SyncWebviewService";

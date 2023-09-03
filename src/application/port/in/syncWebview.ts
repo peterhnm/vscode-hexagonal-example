@@ -32,7 +32,7 @@ export class SyncWebviewQuery {
     }
 
     private validate(data: string): boolean {
-        return false;
+        return true;
     }
 
     private mapContentToMessage(data: string): any {
