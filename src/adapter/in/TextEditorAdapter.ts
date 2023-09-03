@@ -34,7 +34,7 @@ export class TextEditorAdapter implements CustomTextEditorProvider {
         webviewPanel.webview.options = { enableScripts: true };
         webviewPanel.webview.html = getHtml(webviewPanel.webview, this.extensionUri);
 
-        // Sync webview to document
+        // Sync webview with document
         webviewPanel.webview.onDidReceiveMessage(async (message) => {
             if (this.updateFrom === UpdateFrom.DOCUMENT) {
                 this.updateFrom = UpdateFrom.NULL;
@@ -44,14 +44,14 @@ export class TextEditorAdapter implements CustomTextEditorProvider {
             if (message.type === MessageType.UPDATE) {
                 const syncDocumentQuery = new SyncDocumentQuery(document, message);
 
-                if (await this.syncDocumentUseCase.sync(syncDocumentQuery)) {
-                    this.updateFrom = UpdateFrom.WEBVIEW;
-                }
+                this.updateFrom = UpdateFrom.WEBVIEW;
+                this.syncDocumentUseCase.sync(syncDocumentQuery);
             }
         });
 
-        // Sync document to webview
+        // Sync document with webview
         workspace.onDidChangeTextDocument(async (event) => {
+            if (event.contentChanges.length === 0) { return; }
             if (this.updateFrom === UpdateFrom.WEBVIEW) {
                 this.updateFrom = UpdateFrom.NULL;
                 return;
@@ -63,9 +63,7 @@ export class TextEditorAdapter implements CustomTextEditorProvider {
                     event.document.getText(),
                 );
 
-                if (await this.syncWebviewUseCase.sync(syncWebviewQuery)) {
-                    this.updateFrom = UpdateFrom.DOCUMENT;
-                }
+                this.syncWebviewUseCase.sync(syncWebviewQuery);
             }
         });
     }
