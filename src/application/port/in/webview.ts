@@ -2,15 +2,15 @@ import { Webview } from "vscode";
 import { MessageType, WebviewMessage } from "common/webview";
 
 export interface SyncWebviewUseCase {
-    sync(syncWebviewQuery: SyncWebviewQuery): Promise<boolean>;
+    sync(syncWebviewCommand: SyncWebviewCommand): Promise<boolean>;
 }
 
-export class SyncWebviewQuery {
+export class SyncWebviewCommand {
     constructor(
         private readonly _webview: Webview,
         content: string,
     ) {
-        if (!this.validate(content)) {
+        if (!(this.validate(/*content*/))) {
             throw new Error("Invalid content");
         }
 
@@ -31,7 +31,7 @@ export class SyncWebviewQuery {
         return this._webview;
     }
 
-    private validate(data: string): boolean {
+    private validate(/*data: string*/): boolean {
         return true;
     }
 

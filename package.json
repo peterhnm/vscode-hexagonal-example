@@ -15,7 +15,7 @@
     "contributes": {
         "customEditors": [
             {
-                "viewType": "vscode-hexagonal-example",
+                "viewType": "vscode-hexagonal.editor",
                 "displayName": "Hexagonal Editor",
                 "selector": [
                     {
@@ -23,7 +23,23 @@
                     }
                 ]
             }
-        ]
+        ],
+        "commands": [
+            {
+                "command": "vscode-hexagonal.toggleTextEditor",
+                "title": "Toggle Text Editor",
+                "icon": "$(notebook-mimetype)"
+            }
+        ],
+        "menus": {
+            "editor/title": [
+                {
+                    "command": "vscode-hexagonal.toggleTextEditor",
+                    "group": "navigation",
+                    "when": "activeWebviewPanelId == 'vscode-hexagonal.editor'"
+                }
+            ]
+        }
     },
     "scripts": {
         "vscode:prepublish": "yarn run compile",

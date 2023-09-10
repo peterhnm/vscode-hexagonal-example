@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
-import { SyncDocumentQuery, SyncDocumentUseCase } from "port/in/syncDocument";
+import { SyncDocumentCommand, SyncDocumentUseCase } from "port/in/document";
 import { DocumentPort, LoggerPort } from "port/out";
 
 @injectable()
@@ -10,7 +10,7 @@ export class SyncDocumentService implements SyncDocumentUseCase {
         @inject("DocumentPort") private readonly documentPort: DocumentPort,
     ) {}
 
-    async sync(syncDocumentQuery: SyncDocumentQuery): Promise<boolean> {
+    async sync(syncDocumentQuery: SyncDocumentCommand): Promise<boolean> {
         if (
             await this.documentPort.write(
                 syncDocumentQuery.document,

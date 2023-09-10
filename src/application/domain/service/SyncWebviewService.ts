@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
-import { SyncWebviewQuery, SyncWebviewUseCase } from "port/in/syncWebview";
+import { SyncWebviewCommand, SyncWebviewUseCase } from "port/in/webview";
 import { LoggerPort, WebviewPort } from "port/out";
 
 @injectable()
@@ -10,7 +10,7 @@ export class SyncWebviewService implements SyncWebviewUseCase {
         @inject("WebviewPort") private webview: WebviewPort,
     ) {}
 
-    async sync(syncWebviewQuery: SyncWebviewQuery): Promise<boolean> {
+    async sync(syncWebviewQuery: SyncWebviewCommand): Promise<boolean> {
         try {
             if (
                 await this.webview.postMessage(

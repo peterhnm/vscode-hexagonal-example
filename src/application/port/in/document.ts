@@ -2,15 +2,19 @@ import { TextDocument } from "vscode";
 import { WebviewMessage } from "common/webview";
 
 export interface SyncDocumentUseCase {
-    sync(syncDocumentQuery: SyncDocumentQuery): Promise<boolean>;
+    sync(syncDocumentQuery: SyncDocumentCommand): Promise<boolean>;
 }
 
-export class SyncDocumentQuery {
+export interface ActiveDocumentUseCase {
+    setActiveDocument(activeDocumentCommand: ActiveDocumentCommand): boolean;
+}
+
+export class SyncDocumentCommand {
     constructor(
         private readonly _document: TextDocument,
         message: WebviewMessage<any>,
     ) {
-        if (!this.validate(message)) {
+        if (!(this.validate(/*message*/))) {
             throw new Error("Invalid message");
         }
 
@@ -30,11 +34,27 @@ export class SyncDocumentQuery {
         return this._document;
     }
 
-    private validate(message: WebviewMessage<any>): boolean {
+    private validate(/*message: WebviewMessage<any>*/): boolean {
         return true;
     }
 
     private mapMessageToContent(message: WebviewMessage<any>): void {
         this._content = JSON.stringify(message.data);
+    }
+}
+
+export class ActiveDocumentCommand {
+    constructor(private readonly _document: TextDocument) {
+        if (!this.validate()) {
+            throw new Error("Invalid document");
+        }
+    }
+
+    public get document(): TextDocument {
+        return this._document;
+    }
+
+    public validate(): boolean {
+        return true;
     }
 }

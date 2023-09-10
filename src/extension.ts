@@ -1,22 +1,56 @@
 import "reflect-metadata";
-import { ExtensionContext, window } from "vscode";
-import { container } from "tsyringe";
+import {
+    CancellationToken,
+    CustomTextEditorProvider,
+    ExtensionContext,
+    TextDocument,
+    WebviewPanel,
+    window,
+} from "vscode";
+import { container, injectable } from "tsyringe";
 
 import { config } from "./extension.config";
+import { DocumentAdapter, WebviewAdapter } from "adapter/in";
 import { TextEditorAdapter } from "adapter/in/TextEditorAdapter";
+import { EXTENSION_CONTEXT } from "common/helpers";
 
 export function activate(context: ExtensionContext) {
     config();
-    const editor = new TextEditorAdapter(
-        context.extensionUri,
-        container.resolve("SyncWebviewUseCase"),
-        container.resolve("SyncDocumentUseCase"),
+
+    EXTENSION_CONTEXT.setContext(context);
+
+    // CustomTextEditor
+    const editor = window.registerCustomEditorProvider(
+        "vscode-hexagonal.editor",
+        new CustomTextEditor(),
     );
-    const registry = window.registerCustomEditorProvider(
-        "vscode-hexagonal-example",
-        editor,
-    );
-    context.subscriptions.push(registry);
+
+    // Commands
+    container.resolve(TextEditorAdapter);
+
+    EXTENSION_CONTEXT.getContext().subscriptions.push(editor);
 }
 
 export function deactivate() {}
+
+@injectable()
+class CustomTextEditor implements CustomTextEditorProvider {
+    async resolveCustomTextEditor(
+        document: TextDocument,
+        webviewPanel: WebviewPanel,
+        token: CancellationToken,
+    ): Promise<void> {
+        new WebviewAdapter(
+            webviewPanel,
+            document,
+            container.resolve("SyncDocumentUseCase"),
+            container.resolve("ActiveEditorUseCase"),
+        );
+
+        new DocumentAdapter(
+            document,
+            webviewPanel.webview,
+            container.resolve("SyncWebviewUseCase"),
+        );
+    }
+}
