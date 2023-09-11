@@ -5,7 +5,7 @@ export interface TextEditorUseCase {
 }
 
 export class TextEditorCommand {
-    private readonly DOCUMENT_EXTENSION: string = ".hex";
+    private readonly DOCUMENT_EXTENSION: string = ".hexagon";
     private readonly _closedTextDocuments: string[];
 
     constructor(closedTextDocuments: string[]) {
@@ -25,9 +25,9 @@ export class TextEditorCommand {
     }
 
     /**
-     * Filter out the closed editors that are not .hex files
+     * Filter out the closed editors that are not .hexagon files
      * @param closedTextDocuments - The closed editors
-     * @returns The closed editors that are .hex files
+     * @returns The closed editors that are .hexagon files
      * @private
      */
     private filterRelevantDocuments(closedTextDocuments: string[]): string[] {

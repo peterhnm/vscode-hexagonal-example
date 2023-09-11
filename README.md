@@ -16,7 +16,7 @@
     </a>
     <h3>VSCode Hexagonal</h3>
     <p>
-        <i>Sample project for creation of VS Code plugin with a hexagonal software architecture.</i>
+        <i>This project is a sample project for creating a VS Code plugin with a hexagonal software architecture.</i>
         <br />
         <a href="https://github.com/peterhnm/vscode-hexagonal-example/issues">Report Bug</a>
         ·
@@ -26,7 +26,7 @@
 
 ## About The Project
 
-This project is a sample project for the creation of VS Code plugin with a hexagonal software architecture.
+This project is a sample project for creating a VS Code plugin with a hexagonal software architecture.
 
 ### Built With
 
@@ -63,10 +63,10 @@ This project is a sample project for the creation of VS Code plugin with a hexag
    <em>The application's rough software architecture</em>
 </p>
 
-I am using the Hexagonal Architecture as described by Tom Hombergs in his book
+I am using the Hexagonal Architecture as described by *Tom Hombergs* in his book
 [Get Your Hands Dirty on Clean Architecture](https://www.packtpub.com/product/get-your-hands-dirty-on-clean-architecture/9781839211966).  
 The plugin is an example of a [*CustomTextEditor*](https://code.visualstudio.com/api/extension-guides/custom-editors)
-which reacts on `.hex` files.
+which reacts on `.hexagon` files.
 
 As you can see in the diagram above, the application is divided into:
 
