@@ -11,16 +11,16 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-    <a href="https://www.flaticon.com/authors/juicy-fish">
-        <img src="images/content-creator.png" alt="Image" height="180">
+    <a href="https://www.flaticon.com/free-icon/data-analytics_2299744?term=hexagon&page=1&position=24&origin=style&related_id=2299744">
+        <img src="images/hexagon.png" alt="Image" height="180">
     </a>
     <h3>VSCode Hexagonal</h3>
     <p>
         <i>Sample project for creation of VS Code plugin with a hexagonal software architecture.</i>
         <br />
-        <a href="https://github.com/peterhnm/template_empty_repo/issues">Report Bug</a>
+        <a href="https://github.com/peterhnm/vscode-hexagonal-example/issues">Report Bug</a>
         ·
-        <a href="https://github.com/peterhnm/template_empty_repo/pulls">Request Feature</a>
+        <a href="https://github.com/peterhnm/vscode-hexagonal-example/pulls">Request Feature</a>
     </p>
 </div>
 
@@ -70,7 +70,7 @@ which reacts on `.hex` files.
 
 As you can see in the diagram above, the application is divided into:
 
-* **Input-Adapters** *"drive"* our application.In the case of a VS Code plugin, these are mainly user inputs.
+* **Input-Adapters** *"drive"* our application. In the case of a VS Code plugin, these are mainly user inputs.
 * **Services** contain the business logic of our application. They are the core of our application.
 * **Output-Adapters** are *"driven"* by our application to communicate with the outside world.
   In the case of a VS Code plugin, this is the VS Code API itself.
@@ -104,22 +104,22 @@ Distributed under this [license](LICENSE).
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/peterhnm/<repo-name>.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/peterhnm/vscode-hexagonal-example.svg?style=for-the-badge
 
-[contributors-url]: https://github.com/peterhnm/<repo-name>/graphs/contributors
+[contributors-url]: https://github.com/peterhnm/vscode-hexagonal-example/graphs/contributors
 
-[forks-shield]: https://img.shields.io/github/forks/peterhnm/<repo-name>.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/peterhnm/vscode-hexagonal-example.svg?style=for-the-badge
 
-[forks-url]: https://github.com/peterhnm/<repo-name>/network/members
+[forks-url]: https://github.com/peterhnm/vscode-hexagonal-example/network/members
 
-[stars-shield]: https://img.shields.io/github/stars/peterhnm/<repo-name>.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/peterhnm/vscode-hexagonal-example.svg?style=for-the-badge
 
-[stars-url]: https://github.com/peterhnm/<repo-name>/stargazers
+[stars-url]: https://github.com/peterhnm/vscode-hexagonal-example/stargazers
 
-[issues-shield]: https://img.shields.io/github/issues/peterhnm/<repo-name>.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/peterhnm/vscode-hexagonal-example.svg?style=for-the-badge
 
-[issues-url]: https://github.com/peterhnm/<repo-name>/issues
+[issues-url]: https://github.com/peterhnm/vscode-hexagonal-example/issues
 
-[license-shield]: https://img.shields.io/github/license/peterhnm/<repo-name>.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/peterhnm/vscode-hexagonal-example.svg?style=for-the-badge
 
-[license-url]: https://github.com/peterhnm/<repo-name>/blob/main/LICENSE
+[license-url]: https://github.com/peterhnm/vscode-hexagonal-example/blob/main/LICENSE
