@@ -4,6 +4,7 @@
 /.idea
 /.vscode
 
+/docs
 /dist
 /node_modules
 **/.pnp*
