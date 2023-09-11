@@ -1,0 +1,59 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+
+component extension.ts
+component "IoC-Container"
+
+component "WebviewAdapter" as InWebviewAdapter
+component "DocumentAdapter" as InDocumentAdapter
+component "TextEditorAdapter" as InTextEditorAdapter
+
+component Application {
+    portin InitWebviewUseCase
+    portin SyncWebviewUseCase
+    portin SyncDocumentUseCase
+    portin TextEditorUseCase
+
+    portout DocumentPort
+    portout WebviewPort
+    portout TextEditorPort
+    portout LoggerPort
+
+    component InitWebviewService
+    component SyncWebviewService
+    component SyncDocumentService
+    component TextEditorService
+
+    component StandardTextEditor
+}
+
+component "WebviewAdapter" as OutWebviewAdapter
+component "DocumentAdapter" as OutDocumentAdapter
+component "TextEditorAdapter" as OutTextEditorAdapter
+component "LoggerAdapter" as OutLoggerAdapter
+
+TextEditorService --> StandardTextEditor
+
+InitWebviewService ..> InitWebviewUseCase
+InitWebviewService --> WebviewPort
+SyncWebviewService ..> SyncWebviewUseCase
+SyncWebviewService --> WebviewPort
+SyncWebviewService --> LoggerPort
+SyncDocumentService ..> SyncDocumentUseCase
+SyncDocumentService --> DocumentPort
+SyncDocumentService --> LoggerPort
+TextEditorService ..> TextEditorUseCase
+TextEditorService --> TextEditorPort
+
+InWebviewAdapter --> InitWebviewUseCase
+InWebviewAdapter --> SyncDocumentUseCase
+InDocumentAdapter --> SyncWebviewUseCase
+InTextEditorAdapter --> TextEditorUseCase
+
+OutWebviewAdapter ..> WebviewPort
+OutDocumentAdapter ..> DocumentPort
+OutTextEditorAdapter ..> TextEditorPort
+OutLoggerAdapter ..> LoggerPort
+
+@enduml
