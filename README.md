@@ -57,7 +57,7 @@ This project is a sample project for the creation of VS Code plugin with a hexag
 
 ## Documentation
 
-![Component Diagram](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://github.com/peterhnm/vscode-hexagonal-example/blob/9f8705f7531a309bfe645be337c9ddaf8ad39577/docs/Architecture.puml?raw=true)
+![Component Diagram](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://github.com/peterhnm/vscode-hexagonal-example/blob/main/docs/Architecture.puml?raw=true)
 
 ## Contributing
 
