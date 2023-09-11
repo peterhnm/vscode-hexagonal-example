@@ -3,17 +3,19 @@
 
 skinparam component {
   backgroundColor<<Global>> LightGray
-  backgroundColor<<In Adapter>> LightGreen
+  backgroundColor<<InAdapter>> LightGreen
   backgroundColor<<Service>> LightBlue
-  backgroundColor<<Out Adapter>> LightYellow
+  backgroundColor<<OutAdapter>> LightYellow
 }
 
-component extension.ts <<Global>>
+component extension.ts <<Global>> {
+    component CustomTextEditor
+}
 component "IoC-Container" <<Global>>
 
-component "WebviewAdapter" as InWebviewAdapter <<In Adapter>>
-component "DocumentAdapter" as InDocumentAdapter <<In Adapter>>
-component "TextEditorAdapter" as InTextEditorAdapter <<In Adapter>>
+component "WebviewAdapter" as InWebviewAdapter <<InAdapter>>
+component "DocumentAdapter" as InDocumentAdapter <<InAdapter>>
+component "TextEditorAdapter" as InTextEditorAdapter <<InAdapter>>
 
 component {
     portin InitWebviewUseCase
@@ -24,7 +26,6 @@ component {
     portout DocumentPort
     portout WebviewPort
     portout TextEditorPort
-    portout LoggerPort
 
     component InitWebviewService <<Service>>
     component SyncWebviewService <<Service>>
@@ -32,16 +33,15 @@ component {
     component TextEditorService <<Service>>
 }
 
-component "WebviewAdapter" as OutWebviewAdapter <<Out Adapter>>
-component "DocumentAdapter" as OutDocumentAdapter <<Out Adapter>>
-component "TextEditorAdapter" as OutTextEditorAdapter <<Out Adapter>>
-component "LoggerAdapter" as OutLoggerAdapter <<Out Adapter>>
+component "WebviewAdapter" as OutWebviewAdapter <<OutAdapter>>
+component "DocumentAdapter" as OutDocumentAdapter <<OutAdapter>>
+component "TextEditorAdapter" as OutTextEditorAdapter <<OutAdapter>>
 
-extension.ts --> InWebviewAdapter : create
-extension.ts --> InDocumentAdapter : create
 extension.ts --> InTextEditorAdapter : create
-extension.ts --> OutWebviewAdapter : set active webview
-extension.ts --> OutDocumentAdapter : set active document
+CustomTextEditor --> InWebviewAdapter : create
+CustomTextEditor --> InDocumentAdapter : create
+CustomTextEditor --> OutWebviewAdapter : set active webview
+CustomTextEditor --> OutDocumentAdapter : set active document
 
 InWebviewAdapter --> InitWebviewUseCase
 InWebviewAdapter --> SyncDocumentUseCase
@@ -55,14 +55,13 @@ TextEditorUseCase <.. TextEditorService
 
 InitWebviewService --> WebviewPort
 SyncWebviewService --> WebviewPort
-SyncWebviewService --> LoggerPort
 SyncDocumentService --> DocumentPort
-SyncDocumentService --> LoggerPort
 TextEditorService --> TextEditorPort
 
 WebviewPort <.. OutWebviewAdapter
 DocumentPort <.. OutDocumentAdapter
 TextEditorPort <.. OutTextEditorAdapter
-LoggerPort <.. OutLoggerAdapter
+
+OutTextEditorAdapter --> OutDocumentAdapter : get active document
 
 @enduml

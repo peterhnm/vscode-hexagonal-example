@@ -54,14 +54,34 @@ This project is a sample project for the creation of VS Code plugin with a hexag
    code .
    ```
    Press `F5` to run the project in debug mode.
+   Within the **_Extension Host_** open the [example](example) folder.
 
 ## Documentation
 
-![Component Diagram](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://github.com/peterhnm/vscode-hexagonal-example/blob/main/docs/Architecture.puml?raw=true)
+<p>
+   <img src="https://www.plantuml.com/plantuml/proxy?cache=no&src=https://github.com/peterhnm/vscode-hexagonal-example/blob/main/docs/Architecture.puml?raw=true" alt="Component Diagram" /><br />
+   <em>The application's rough software architecture</em>
+</p>
+
+I am using the Hexagonal Architecture as described by Tom Hombergs in his book
+[Get Your Hands Dirty on Clean Architecture](https://www.packtpub.com/product/get-your-hands-dirty-on-clean-architecture/9781839211966).  
+The plugin is an example of a [*CustomTextEditor*](https://code.visualstudio.com/api/extension-guides/custom-editors)
+which reacts on `.hex` files.
+
+As you can see in the diagram above, the application is divided into:
+
+* **Input-Adapters** *"drive"* our application.In the case of a VS Code plugin, these are mainly user inputs.
+* **Services** contain the business logic of our application. They are the core of our application.
+* **Output-Adapters** are *"driven"* by our application to communicate with the outside world.
+  In the case of a VS Code plugin, this is the VS Code API itself.
+
+**The application core, which contains the ports and services, does not depend on VS Code.**
+
+* [Scenarios](docs/Scenarios.md)
 
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any
 contributions you make are **greatly appreciated**.
 
 If you have a suggestion that would make this better, please open an issue with the tag "enhancement", fork the repo and
