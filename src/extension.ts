@@ -7,11 +7,18 @@ import {
     WebviewPanel,
     window,
 } from "vscode";
-import { container, injectable } from "tsyringe";
+import { container } from "tsyringe";
 
 import { config } from "./extension.config";
-import { DocumentAdapter, WebviewAdapter } from "adapter/in";
-import { TextEditorAdapter } from "adapter/in/TextEditorAdapter";
+import {
+    DocumentAdapter as InDocumentAdapter,
+    TextEditorAdapter,
+    WebviewAdapter as InWebviewAdapter,
+} from "adapter/in";
+import {
+    DocumentAdapter as OutDocumentAdapter,
+    WebviewAdapter as OutWebviewAdapter,
+} from "adapter/out";
 import { EXTENSION_CONTEXT } from "common/helpers";
 
 export function activate(context: ExtensionContext) {
@@ -33,24 +40,39 @@ export function activate(context: ExtensionContext) {
 
 export function deactivate() {}
 
-@injectable()
 class CustomTextEditor implements CustomTextEditorProvider {
     async resolveCustomTextEditor(
         document: TextDocument,
         webviewPanel: WebviewPanel,
         token: CancellationToken,
     ): Promise<void> {
-        new WebviewAdapter(
-            webviewPanel,
+        this.initialSetup(webviewPanel, document);
+
+        new InWebviewAdapter(
+            webviewPanel.webview,
             document,
+            container.resolve("InitWebviewUseCase"),
             container.resolve("SyncDocumentUseCase"),
-            container.resolve("ActiveEditorUseCase"),
         );
 
-        new DocumentAdapter(
-            document,
-            webviewPanel.webview,
-            container.resolve("SyncWebviewUseCase"),
-        );
+        new InDocumentAdapter(document, container.resolve("SyncWebviewUseCase"));
+    }
+
+    private initialSetup(webviewPanel: WebviewPanel, document: TextDocument) {
+        const documentAdapter = container.resolve<OutDocumentAdapter>("DocumentPort");
+        const webviewAdapter = container.resolve<OutWebviewAdapter>("WebviewPort");
+
+        documentAdapter.updateActiveDocument(document);
+        webviewAdapter.updateActiveWebview(document.fileName, webviewPanel.webview);
+
+        webviewPanel.onDidChangeViewState((event) => {
+            if (event.webviewPanel.active) {
+                documentAdapter.updateActiveDocument(document);
+                webviewAdapter.updateActiveWebview(
+                    document.fileName,
+                    webviewPanel.webview,
+                );
+            }
+        });
     }
 }

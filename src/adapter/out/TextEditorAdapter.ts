@@ -1,24 +1,29 @@
-import { TextEditorPort } from "port/out/TextEditorPort";
 import {
     Tab,
     TabInputText,
-    TextDocument,
     TextDocumentShowOptions,
     ViewColumn,
     window,
 } from "vscode";
+import {container} from "tsyringe";
+
+import { TextEditorPort } from "port/out/TextEditorPort";
+import {DocumentAdapter} from "adapter/out/DocumentAdapter";
 
 export class TextEditorAdapter implements TextEditorPort {
-    async createTextEditor(document: TextDocument): Promise<string> {
+    async createTextEditor(documentId: string): Promise<string> {
+        const document = container.resolve<DocumentAdapter>("DocumentPort").loadActiveDocument(documentId);
+
         const textEditor = await window.showTextDocument(
             document,
             this.getShowOptions(),
         );
+
         return textEditor.document.fileName;
     }
 
-    async closeTextEditor(fileName: string): Promise<boolean> {
-        const tab = this.findTab(fileName);
+    async closeTextEditor(documentId: string): Promise<boolean> {
+        const tab = this.findTab(documentId);
 
         if (!tab) {
             return true;
@@ -29,16 +34,16 @@ export class TextEditorAdapter implements TextEditorPort {
 
     /**
      * Get the tab with the correct text editor.
-     * @param fileName - The file name of the document controlled by the text editor.
+     * @param documentId - The file name of the document controlled by the text editor.
      * @returns The tab with the correct text editor.
      * @private
      */
-    private findTab(fileName: string): Tab | undefined {
+    private findTab(documentId: string): Tab | undefined {
         for (const tabGroup of window.tabGroups.all) {
             for (const tab of tabGroup.tabs) {
                 if (
                     tab.input instanceof TabInputText &&
-                    tab.input.uri.path === fileName
+                    tab.input.uri.path === documentId
                 ) {
                     return tab;
                 }

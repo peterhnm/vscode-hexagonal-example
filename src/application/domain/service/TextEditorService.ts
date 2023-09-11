@@ -7,34 +7,32 @@ import { StandardTextEditor } from "../model/StandardTextEditor";
 @injectable()
 export class TextEditorService implements TextEditorUseCase {
     constructor(
-        @inject("DocumentPort")
-        private readonly documentPort: DocumentPort,
-        @inject("TextEditorPort")
-        private readonly textEditorPort: TextEditorPort,
+        @inject("DocumentPort") private readonly documentPort: DocumentPort,
+        @inject("TextEditorPort") private readonly textEditorPort: TextEditorPort,
     ) {}
 
     async toggle(): Promise<boolean> {
-        const document = this.documentPort.getActiveDocument();
+        const documentId = this.documentPort.loadActiveDocumentId();
         const textEditor = container.resolve(StandardTextEditor);
 
         if (textEditor.isOpen) {
-            if (await this.textEditorPort.closeTextEditor(document.fileName)) {
+            if (await this.textEditorPort.closeTextEditor(documentId)) {
                 textEditor.isOpen = false;
                 textEditor.fileName = "";
             }
             return textEditor.isOpen;
         }
 
+        textEditor.fileName = await this.textEditorPort.createTextEditor(documentId);
         textEditor.isOpen = true;
-        textEditor.fileName = await this.textEditorPort.createTextEditor(document);
         return textEditor.isOpen;
     }
 
     async close(textEditorCommand: TextEditorCommand): Promise<boolean> {
+        const closedTextEditors = textEditorCommand.relevantDocuments;
         const standardTextEditor = container.resolve(StandardTextEditor);
-        const closedEditors = textEditorCommand.closedEditors;
 
-        for (const fileName of closedEditors) {
+        for (const fileName of closedTextEditors) {
             if (fileName === standardTextEditor.fileName) {
                 standardTextEditor.isOpen = false;
             }

@@ -1,4 +1,3 @@
-import { Tab, TabInputText } from "vscode";
 
 export interface TextEditorUseCase {
     toggle(): Promise<boolean>;
@@ -7,29 +6,39 @@ export interface TextEditorUseCase {
 }
 
 export class TextEditorCommand {
-    constructor(private readonly _closedTabs: Readonly<Tab[]>) {
-        if (!this.validate()) {
-            throw new Error("Invalid text editors");
+    private readonly DOCUMENT_EXTENSION: string = ".hex";
+
+    constructor(closedTextDocuments: string[]) {
+        if (!this.validate(closedTextDocuments)) {
+            throw new Error("Invalid closed editors");
         }
 
-        this.filterClosedEditors();
+        this._relevantDocuments = this.filterRelevantDocuments(closedTextDocuments);
     }
 
-    private _closedEditors: string[] = [];
+    private readonly _relevantDocuments: string[];
 
-    get closedEditors(): string[] {
-        return this._closedEditors;
+    get relevantDocuments(): string[] {
+        return this._relevantDocuments;
     }
 
-    private validate(): boolean {
-        return true;
+    private validate(closedTextDocuments: string[]): boolean {
+        return closedTextDocuments.length > 0;
     }
 
-    private filterClosedEditors() {
-        this._closedTabs.forEach((tab) => {
-            if (tab.input instanceof TabInputText) {
-                this._closedEditors.push(tab.input.uri.path);
+    /**
+     * Filter out the closed editors that are not .hex files
+     * @param closedTextDocuments - The closed editors
+     * @returns The closed editors that are .hex files
+     * @private
+     */
+    private filterRelevantDocuments(closedTextDocuments: string[]): string[] {
+        const relevantDocuments: string[] = [];
+        for (const document of closedTextDocuments) {
+            if (document.endsWith(this.DOCUMENT_EXTENSION)) {
+                relevantDocuments.push(document);
             }
-        });
+        }
+        return relevantDocuments;
     }
 }

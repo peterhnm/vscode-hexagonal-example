@@ -1,4 +1,4 @@
-import { TextDocument, Webview, workspace } from "vscode";
+import { TextDocument, workspace } from "vscode";
 import { inject, injectable } from "tsyringe";
 
 import { setUpdateFrom, UpdateFrom, updateFrom } from "common/helpers";
@@ -8,7 +8,6 @@ import { SyncWebviewCommand, SyncWebviewUseCase } from "port/in/webview";
 export class DocumentAdapter {
     constructor(
         private readonly document: TextDocument,
-        private readonly webview: Webview,
         @inject("SyncWebviewUseCase")
         private readonly syncWebviewUseCase: SyncWebviewUseCase,
     ) {
@@ -27,12 +26,12 @@ export class DocumentAdapter {
             }
 
             if (this.document.fileName === event.document.fileName) {
-                const syncWebviewQuery = new SyncWebviewCommand(
-                    this.webview,
+                const syncWebviewCommand = new SyncWebviewCommand(
+                    this.document.fileName,
                     event.document.getText(),
                 );
 
-                this.syncWebviewUseCase.sync(syncWebviewQuery);
+                this.syncWebviewUseCase.sync(syncWebviewCommand);
             }
         });
     }

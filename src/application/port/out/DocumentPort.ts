@@ -1,11 +1,8 @@
-import { TextDocument } from "vscode";
 
 export interface DocumentPort {
-    write(document: TextDocument, content: string): Promise<boolean>;
+    write(fileName: string, content: string): Promise<boolean>;
 
-    save(document: TextDocument): Promise<boolean>;
+    save(fileName: string): Promise<boolean>;
 
-    setActiveDocument(document: TextDocument): boolean;
-
-    getActiveDocument(): TextDocument;
+    loadActiveDocumentId(): string;
 }

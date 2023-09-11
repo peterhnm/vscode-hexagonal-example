@@ -10,16 +10,16 @@ export class SyncDocumentService implements SyncDocumentUseCase {
         @inject("DocumentPort") private readonly documentPort: DocumentPort,
     ) {}
 
-    async sync(syncDocumentQuery: SyncDocumentCommand): Promise<boolean> {
+    async sync(syncDocumentCommand: SyncDocumentCommand): Promise<boolean> {
         if (
             await this.documentPort.write(
-                syncDocumentQuery.document,
-                syncDocumentQuery.content,
+                syncDocumentCommand.fileName,
+                syncDocumentCommand.content,
             )
         ) {
-            return await this.documentPort.save(syncDocumentQuery.document);
+            return await this.documentPort.save(syncDocumentCommand.fileName);
         }
-        // TODO: Handle error
+        // Handle error
         return false;
     }
 }

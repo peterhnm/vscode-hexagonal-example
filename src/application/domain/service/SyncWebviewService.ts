@@ -1,4 +1,4 @@
-import { inject, injectable } from "tsyringe";
+import {inject, injectable} from "tsyringe";
 
 import { SyncWebviewCommand, SyncWebviewUseCase } from "port/in/webview";
 import { LoggerPort, WebviewPort } from "port/out";
@@ -6,24 +6,24 @@ import { LoggerPort, WebviewPort } from "port/out";
 @injectable()
 export class SyncWebviewService implements SyncWebviewUseCase {
     constructor(
-        @inject("LoggerPort") private logger: LoggerPort,
-        @inject("WebviewPort") private webview: WebviewPort,
+        @inject("LoggerPort") private loggerPort: LoggerPort,
+        @inject("WebviewPort") private webviewPort: WebviewPort,
     ) {}
 
-    async sync(syncWebviewQuery: SyncWebviewCommand): Promise<boolean> {
+    async sync(syncWebviewCommand: SyncWebviewCommand): Promise<boolean> {
         try {
             if (
-                await this.webview.postMessage(
-                    syncWebviewQuery.webview,
-                    syncWebviewQuery.message,
+                await this.webviewPort.postMessage(
+                    syncWebviewCommand.webviewId,
+                    syncWebviewCommand.message,
                 )
             ) {
                 return true;
             }
-            // TODO: Add retry logic
+            // e.g., add retry logic
             return false;
         } catch (error) {
-            this.logger.error(error);
+            this.loggerPort.error(error);
             return false;
         }
     }

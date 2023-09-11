@@ -5,13 +5,13 @@ import {
     TextEditorAdapter,
     WebviewAdapter,
 } from "adapter/out";
+import { InitWebviewService } from "./application/domain/service/InitWebviewService";
 import { SyncWebviewService } from "./application/domain/service/SyncWebviewService";
 import { SyncDocumentService } from "./application/domain/service/SyncDocumentService";
 import { TextEditorService } from "./application/domain/service/TextEditorService";
-import { ActiveEditorService } from "./application/domain/service/ActiveEditorService";
 
 export function config() {
-    // Register adapters
+    // Register out-adapters
     container.register(
         "LoggerPort",
         { useClass: LoggerAdapter },
@@ -35,6 +35,11 @@ export function config() {
 
     // Register services
     container.register(
+        "InitWebviewUseCase",
+        { useClass: InitWebviewService },
+        { lifecycle: Lifecycle.Singleton }
+    );
+    container.register(
         "SyncWebviewUseCase",
         { useClass: SyncWebviewService },
         { lifecycle: Lifecycle.Singleton },
@@ -44,11 +49,16 @@ export function config() {
         { useClass: SyncDocumentService },
         { lifecycle: Lifecycle.Singleton },
     );
-    container.register(
-        "ActiveEditorUseCase",
-        { useClass: ActiveEditorService },
-        { lifecycle: Lifecycle.Singleton },
-    );
+    // container.register(
+    //     "ActiveWebviewUseCase",
+    //     { useClass: ActiveWebviewService },
+    //     { lifecycle: Lifecycle.Singleton },
+    // );
+    // container.register(
+    //     "ActiveEditorUseCase",
+    //     { useClass: ActiveEditorService },
+    //     { lifecycle: Lifecycle.Singleton },
+    // );
     container.register(
         "TextEditorUseCase",
         { useClass: TextEditorService },
