@@ -1,27 +1,19 @@
-import { singleton } from "tsyringe";
-
-@singleton()
 export class StandardTextEditor {
-    private _isOpen = false;
+    constructor(private _textEditors: string[]) {}
 
-    public get isOpen(): boolean {
-        return this._isOpen;
+    get textEditors(): string[] {
+        return this._textEditors;
     }
 
-    public set isOpen(value: boolean) {
-        this._isOpen = value;
+    isOpen(documentId: string): boolean {
+        return this._textEditors.includes(documentId);
     }
 
-    private _fileName: string | undefined;
-
-    public get fileName(): string {
-        if (!this._fileName) {
-            throw new Error("No text editor set");
-        }
-        return this._fileName;
+    open(documentId: string): void {
+        this._textEditors.push(documentId);
     }
 
-    public set fileName(value: string) {
-        this._fileName = value;
+    close(documentId: string): void {
+        this._textEditors = this._textEditors.filter((id) => id !== documentId);
     }
 }

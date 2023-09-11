@@ -3,8 +3,11 @@ import { container } from "tsyringe";
 
 import { TextEditorPort } from "port/out";
 import { DocumentAdapter } from "adapter/out";
+import { StandardTextEditor } from "../../application/domain/model/StandardTextEditor";
 
 export class TextEditorAdapter implements TextEditorPort {
+    private textEditors: string[] = [];
+
     async createTextEditor(documentId: string): Promise<string> {
         const document = container
             .resolve<DocumentAdapter>("DocumentPort")
@@ -26,6 +29,15 @@ export class TextEditorAdapter implements TextEditorPort {
         }
 
         return window.tabGroups.close(tab);
+    }
+
+    async loadTextEditors(): Promise<StandardTextEditor> {
+        return new StandardTextEditor(this.textEditors);
+    }
+
+    async updateTextEditors(editor: StandardTextEditor): Promise<boolean> {
+        this.textEditors = editor.textEditors;
+        return true;
     }
 
     /**

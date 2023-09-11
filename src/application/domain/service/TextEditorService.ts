@@ -1,4 +1,4 @@
-import { container, inject, injectable } from "tsyringe";
+import { inject, injectable } from "tsyringe";
 
 import { TextEditorCommand, TextEditorUseCase } from "port/in/textEditor";
 import { DocumentPort, TextEditorPort } from "port/out";
@@ -13,28 +13,28 @@ export class TextEditorService implements TextEditorUseCase {
 
     async toggle(): Promise<boolean> {
         const documentId = this.documentPort.loadActiveDocumentId();
-        const textEditor = container.resolve(StandardTextEditor);
+        const editor: StandardTextEditor = await this.textEditorPort.loadTextEditors();
 
-        if (textEditor.isOpen) {
+        if (editor.isOpen(documentId)) {
             if (await this.textEditorPort.closeTextEditor(documentId)) {
-                textEditor.isOpen = false;
-                textEditor.fileName = "";
+                editor.close(documentId);
+                return this.textEditorPort.updateTextEditors(editor);
             }
-            return textEditor.isOpen;
+            throw new Error("Could not close text editor.");
         }
 
-        textEditor.fileName = await this.textEditorPort.createTextEditor(documentId);
-        textEditor.isOpen = true;
-        return textEditor.isOpen;
+        editor.open(await this.textEditorPort.createTextEditor(documentId));
+        return this.textEditorPort.updateTextEditors(editor);
     }
 
     async close(textEditorCommand: TextEditorCommand): Promise<boolean> {
-        const closedTextEditors = textEditorCommand.relevantDocuments;
-        const standardTextEditor = container.resolve(StandardTextEditor);
+        const closedTextDocuments = textEditorCommand.closedTextDocuments;
+        const editor: StandardTextEditor = await this.textEditorPort.loadTextEditors();
 
-        for (const fileName of closedTextEditors) {
-            if (fileName === standardTextEditor.fileName) {
-                standardTextEditor.isOpen = false;
+        for (const documentId of closedTextDocuments) {
+            if (editor.isOpen(documentId)) {
+                editor.close(documentId);
+                return this.textEditorPort.updateTextEditors(editor);
             }
         }
 

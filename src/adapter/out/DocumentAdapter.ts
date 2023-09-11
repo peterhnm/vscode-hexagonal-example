@@ -1,9 +1,7 @@
 import { Range, TextDocument, workspace, WorkspaceEdit } from "vscode";
-import { singleton } from "tsyringe";
 
 import { DocumentPort } from "port/out";
 
-@singleton()
 export class DocumentAdapter implements DocumentPort {
     private activeDocument: TextDocument | undefined;
 

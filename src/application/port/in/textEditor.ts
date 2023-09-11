@@ -6,19 +6,18 @@ export interface TextEditorUseCase {
 
 export class TextEditorCommand {
     private readonly DOCUMENT_EXTENSION: string = ".hex";
+    private readonly _closedTextDocuments: string[];
 
     constructor(closedTextDocuments: string[]) {
         if (!this.validate(closedTextDocuments)) {
             throw new Error("Invalid closed editors");
         }
 
-        this._relevantDocuments = this.filterRelevantDocuments(closedTextDocuments);
+        this._closedTextDocuments = this.filterRelevantDocuments(closedTextDocuments);
     }
 
-    private readonly _relevantDocuments: string[];
-
-    get relevantDocuments(): string[] {
-        return this._relevantDocuments;
+    get closedTextDocuments(): string[] {
+        return this._closedTextDocuments;
     }
 
     private validate(closedTextDocuments: string[]): boolean {
