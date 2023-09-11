@@ -14,9 +14,9 @@
     <a href="https://www.flaticon.com/authors/juicy-fish">
         <img src="images/content-creator.png" alt="Image" height="180">
     </a>
-    <h3>My Template Repository</h3>
+    <h3>VSCode Hexagonal</h3>
     <p>
-        <i>Template repository for new empty repositories.</i>
+        <i>Sample project for creation of VS Code plugin with a hexagonal software architecture.</i>
         <br />
         <a href="https://github.com/peterhnm/template_empty_repo/issues">Report Bug</a>
         ·
@@ -26,11 +26,38 @@
 
 ## About The Project
 
+This project is a sample project for the creation of VS Code plugin with a hexagonal software architecture.
+
 ### Built With
+
+* [Yarn 2](https://yarnpkg.com/getting-started/install)
+* [Tsyringe](https://github.com/microsoft/tsyringe)
+* [VSCode API](https://code.visualstudio.com/api/references/vscode-api)
+* [TypeScript](https://www.typescriptlang.org/)
 
 ## Getting started
 
+1. Clone the repository
+   ```shell
+   https://github.com/peterhnm/vscode-hexagonal-example.git
+   ```
+2. Install dependencies
+   ```shell
+   yarn install
+   ```
+3. Build the project
+   ```shell
+   yarn build
+   ```
+4. Run the project in VS Code
+   ```shell
+   code .
+   ```
+   Press `F5` to run the project in debug mode.
+
 ## Documentation
+
+![Component Diagram](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://github.com/peterhnm/vscode-hexagonal-example/blob/9f8705f7531a309bfe645be337c9ddaf8ad39577/docs/Architecture.puml?raw=true)
 
 ## Contributing
 

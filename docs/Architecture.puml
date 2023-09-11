@@ -1,15 +1,21 @@
 @startuml
 'https://plantuml.com/component-diagram
 
+skinparam component {
+  backgroundColor<<Global>> LightGray
+  backgroundColor<<In Adapter>> LightGreen
+  backgroundColor<<Service>> LightBlue
+  backgroundColor<<Out Adapter>> LightYellow
+}
 
-component extension.ts
-component "IoC-Container"
+component extension.ts <<Global>>
+component "IoC-Container" <<Global>>
 
-component "WebviewAdapter" as InWebviewAdapter
-component "DocumentAdapter" as InDocumentAdapter
-component "TextEditorAdapter" as InTextEditorAdapter
+component "WebviewAdapter" as InWebviewAdapter <<In Adapter>>
+component "DocumentAdapter" as InDocumentAdapter <<In Adapter>>
+component "TextEditorAdapter" as InTextEditorAdapter <<In Adapter>>
 
-component Application {
+component {
     portin InitWebviewUseCase
     portin SyncWebviewUseCase
     portin SyncDocumentUseCase
@@ -20,40 +26,43 @@ component Application {
     portout TextEditorPort
     portout LoggerPort
 
-    component InitWebviewService
-    component SyncWebviewService
-    component SyncDocumentService
-    component TextEditorService
-
-    component StandardTextEditor
+    component InitWebviewService <<Service>>
+    component SyncWebviewService <<Service>>
+    component SyncDocumentService <<Service>>
+    component TextEditorService <<Service>>
 }
 
-component "WebviewAdapter" as OutWebviewAdapter
-component "DocumentAdapter" as OutDocumentAdapter
-component "TextEditorAdapter" as OutTextEditorAdapter
-component "LoggerAdapter" as OutLoggerAdapter
+component "WebviewAdapter" as OutWebviewAdapter <<Out Adapter>>
+component "DocumentAdapter" as OutDocumentAdapter <<Out Adapter>>
+component "TextEditorAdapter" as OutTextEditorAdapter <<Out Adapter>>
+component "LoggerAdapter" as OutLoggerAdapter <<Out Adapter>>
 
-TextEditorService --> StandardTextEditor
-
-InitWebviewService ..> InitWebviewUseCase
-InitWebviewService --> WebviewPort
-SyncWebviewService ..> SyncWebviewUseCase
-SyncWebviewService --> WebviewPort
-SyncWebviewService --> LoggerPort
-SyncDocumentService ..> SyncDocumentUseCase
-SyncDocumentService --> DocumentPort
-SyncDocumentService --> LoggerPort
-TextEditorService ..> TextEditorUseCase
-TextEditorService --> TextEditorPort
+extension.ts --> InWebviewAdapter : create
+extension.ts --> InDocumentAdapter : create
+extension.ts --> InTextEditorAdapter : create
+extension.ts --> OutWebviewAdapter : set active webview
+extension.ts --> OutDocumentAdapter : set active document
 
 InWebviewAdapter --> InitWebviewUseCase
 InWebviewAdapter --> SyncDocumentUseCase
 InDocumentAdapter --> SyncWebviewUseCase
 InTextEditorAdapter --> TextEditorUseCase
 
-OutWebviewAdapter ..> WebviewPort
-OutDocumentAdapter ..> DocumentPort
-OutTextEditorAdapter ..> TextEditorPort
-OutLoggerAdapter ..> LoggerPort
+InitWebviewUseCase <.. InitWebviewService
+SyncWebviewUseCase <.. SyncWebviewService
+SyncDocumentUseCase <.. SyncDocumentService
+TextEditorUseCase <.. TextEditorService
+
+InitWebviewService --> WebviewPort
+SyncWebviewService --> WebviewPort
+SyncWebviewService --> LoggerPort
+SyncDocumentService --> DocumentPort
+SyncDocumentService --> LoggerPort
+TextEditorService --> TextEditorPort
+
+WebviewPort <.. OutWebviewAdapter
+DocumentPort <.. OutDocumentAdapter
+TextEditorPort <.. OutTextEditorAdapter
+LoggerPort <.. OutLoggerAdapter
 
 @enduml
