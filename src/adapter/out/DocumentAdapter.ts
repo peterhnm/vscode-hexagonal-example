@@ -1,6 +1,7 @@
-import {Range, TextDocument, workspace, WorkspaceEdit} from "vscode";
-import {DocumentPort} from "port/out/DocumentPort";
-import {singleton} from "tsyringe";
+import { Range, TextDocument, workspace, WorkspaceEdit } from "vscode";
+import { singleton } from "tsyringe";
+
+import { DocumentPort } from "port/out";
 
 @singleton()
 export class DocumentAdapter implements DocumentPort {
@@ -36,12 +37,12 @@ export class DocumentAdapter implements DocumentPort {
         return this.activeDocument.fileName;
     }
 
-   updateActiveDocument(document: TextDocument): boolean {
+    updateActiveDocument(document: TextDocument): boolean {
         this.activeDocument = document;
         return true;
     }
 
-   private validate(fileName: string): TextDocument {
+    private validate(fileName: string): TextDocument {
         if (!this.activeDocument) {
             throw new Error("No active document!");
         }
@@ -50,5 +51,5 @@ export class DocumentAdapter implements DocumentPort {
         }
 
         return this.activeDocument;
-   }
+    }
 }

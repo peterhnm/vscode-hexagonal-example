@@ -1,18 +1,14 @@
-import {
-    Tab,
-    TabInputText,
-    TextDocumentShowOptions,
-    ViewColumn,
-    window,
-} from "vscode";
-import {container} from "tsyringe";
+import { Tab, TabInputText, TextDocumentShowOptions, ViewColumn, window } from "vscode";
+import { container } from "tsyringe";
 
-import { TextEditorPort } from "port/out/TextEditorPort";
-import {DocumentAdapter} from "adapter/out/DocumentAdapter";
+import { TextEditorPort } from "port/out";
+import { DocumentAdapter } from "adapter/out";
 
 export class TextEditorAdapter implements TextEditorPort {
     async createTextEditor(documentId: string): Promise<string> {
-        const document = container.resolve<DocumentAdapter>("DocumentPort").loadActiveDocument(documentId);
+        const document = container
+            .resolve<DocumentAdapter>("DocumentPort")
+            .loadActiveDocument(documentId);
 
         const textEditor = await window.showTextDocument(
             document,

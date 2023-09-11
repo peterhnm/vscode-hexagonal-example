@@ -37,7 +37,7 @@ export function config() {
     container.register(
         "InitWebviewUseCase",
         { useClass: InitWebviewService },
-        { lifecycle: Lifecycle.Singleton }
+        { lifecycle: Lifecycle.Singleton },
     );
     container.register(
         "SyncWebviewUseCase",
@@ -49,16 +49,6 @@ export function config() {
         { useClass: SyncDocumentService },
         { lifecycle: Lifecycle.Singleton },
     );
-    // container.register(
-    //     "ActiveWebviewUseCase",
-    //     { useClass: ActiveWebviewService },
-    //     { lifecycle: Lifecycle.Singleton },
-    // );
-    // container.register(
-    //     "ActiveEditorUseCase",
-    //     { useClass: ActiveEditorService },
-    //     { lifecycle: Lifecycle.Singleton },
-    // );
     container.register(
         "TextEditorUseCase",
         { useClass: TextEditorService },

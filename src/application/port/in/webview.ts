@@ -47,16 +47,16 @@ export class SyncWebviewCommand {
 }
 
 export class InitWebviewCommand {
-     constructor(
-         private readonly _webviewId: string,
-         content: string,
-     ) {
-         if (!this.validate(content)) {
-             throw new Error("Invalid content");
-         }
+    constructor(
+        private readonly _webviewId: string,
+        content: string,
+    ) {
+        if (!this.validate(content)) {
+            throw new Error("Invalid content");
+        }
 
-         this.mapContentToMessage(content);
-     }
+        this.mapContentToMessage(content);
+    }
 
     // FIXME: change any to a proper type
     private _message: WebviewMessage<any> | undefined;
@@ -68,13 +68,13 @@ export class InitWebviewCommand {
         return this._message;
     }
 
-     public get webviewId(): string {
-         return this._webviewId;
-     }
+    public get webviewId(): string {
+        return this._webviewId;
+    }
 
-     public validate(content: string): boolean {
-         return content.length > 0;
-     }
+    public validate(content: string): boolean {
+        return content.length > 0;
+    }
 
     private mapContentToMessage(data: string): any {
         this._message = {

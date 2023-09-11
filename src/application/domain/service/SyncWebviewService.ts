@@ -1,4 +1,4 @@
-import {inject, injectable} from "tsyringe";
+import { inject, injectable } from "tsyringe";
 
 import { SyncWebviewCommand, SyncWebviewUseCase } from "port/in/webview";
 import { LoggerPort, WebviewPort } from "port/out";

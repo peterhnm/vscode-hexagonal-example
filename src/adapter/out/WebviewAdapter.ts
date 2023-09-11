@@ -1,7 +1,8 @@
 import { Webview } from "vscode";
-import { WebviewPort } from "port/out/WebviewPort";
-import { WebviewMessage } from "common/webview";
 import { singleton } from "tsyringe";
+
+import { WebviewMessage } from "common/webview";
+import { WebviewPort } from "port/out";
 
 @singleton()
 export class WebviewAdapter implements WebviewPort {

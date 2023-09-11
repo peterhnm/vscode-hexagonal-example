@@ -8,50 +8,30 @@ import {
     UpdateFrom,
     updateFrom,
 } from "common/helpers";
-import {
-    // ActiveDocumentCommand,
-    // ActiveDocumentUseCase,
-    SyncDocumentCommand,
-    SyncDocumentUseCase,
-} from "port/in/document";
-import {InitWebviewCommand, InitWebviewUseCase} from "port/in/webview";
-// import {ActiveWebviewCommand, ActiveWebviewUseCase} from "port/in/webview";
+import { SyncDocumentCommand, SyncDocumentUseCase } from "port/in/document";
+import { InitWebviewCommand, InitWebviewUseCase } from "port/in/webview";
 
 @injectable()
 export class WebviewAdapter {
     constructor(
         webview: Webview,
         document: TextDocument,
-        @inject("InitWebviewUseCase") private readonly initWebviewUseCase: InitWebviewUseCase,
-        @inject("SyncDocumentUseCase") private readonly syncDocumentUseCase: SyncDocumentUseCase,
-        // @inject("ActiveWebviewUseCase") private readonly activeWebviewUseCase: ActiveWebviewUseCase,
-        // @inject("ActiveEditorUseCase") private readonly activeEditorUseCase: ActiveDocumentUseCase,
+        @inject("InitWebviewUseCase")
+        private readonly initWebviewUseCase: InitWebviewUseCase,
+        @inject("SyncDocumentUseCase")
+        private readonly syncDocumentUseCase: SyncDocumentUseCase,
     ) {
-        // this.webview.options = { enableScripts: true };
-        // this.webview.html = getHtml(
-        //     webview,
-        //     EXTENSION_CONTEXT.getContext().extensionUri,
-        // );
-
-        // // Initial setup of the document and webview
-        // this.activeEditorUseCase.setActiveDocument(
-        //     new ActiveDocumentCommand(this.document),
-        // );
-        // this.activeWebviewUseCase.setActiveWebview(
-        //     new ActiveWebviewCommand(this.document.fileName, this.webviewPanel.webview),
-        // );
-
         this.initWebview(webview, document);
         this.onDidReceiveMessage(webview, document);
     }
 
     private initWebview(webview: Webview, document: TextDocument) {
         webview.options = { enableScripts: true };
-        webview.html = getHtml(
-            webview,
-            EXTENSION_CONTEXT.getContext().extensionUri,
+        webview.html = getHtml(webview, EXTENSION_CONTEXT.getContext().extensionUri);
+        const initWebviewCommand = new InitWebviewCommand(
+            document.fileName,
+            document.getText(),
         );
-        const initWebviewCommand = new InitWebviewCommand(document.fileName, document.getText());
         this.initWebviewUseCase.initWebview(initWebviewCommand);
     }
 
@@ -72,17 +52,6 @@ export class WebviewAdapter {
                 this.syncDocumentUseCase.sync(syncDocumentCommand);
             }
         });
-
-        // this.webviewPanel.onDidChangeViewState((event) => {
-        //     if (event.webviewPanel.active) {
-        //         const activeDocumentCommand = new ActiveDocumentCommand(this.document);
-        //         this.activeEditorUseCase.setActiveDocument(activeDocumentCommand);
-
-        //         const activeWebviewCommand =
-        //             new ActiveWebviewCommand(this.document.fileName, event.webviewPanel.webview);
-        //         this.activeWebviewUseCase.setActiveWebview(activeWebviewCommand);
-        //     }
-        // });
     }
 }
 

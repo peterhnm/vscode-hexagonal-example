@@ -1,4 +1,3 @@
-
 export interface DocumentPort {
     write(fileName: string, content: string): Promise<boolean>;
 
