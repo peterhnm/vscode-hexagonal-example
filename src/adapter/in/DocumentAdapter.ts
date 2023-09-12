@@ -11,10 +11,10 @@ export class DocumentAdapter {
         @inject("SyncWebviewUseCase")
         private readonly syncWebviewUseCase: SyncWebviewUseCase,
     ) {
-        this.registerEvents();
+        this.onDidChangeTextDocument();
     }
 
-    private registerEvents() {
+    private onDidChangeTextDocument() {
         // Sync document with webview
         workspace.onDidChangeTextDocument(async (event) => {
             if (event.contentChanges.length === 0) {

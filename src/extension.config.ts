@@ -11,7 +11,11 @@ import { SyncDocumentService } from "./application/domain/service/SyncDocumentSe
 import { TextEditorService } from "./application/domain/service/TextEditorService";
 
 export function config() {
-    // Register out-adapters
+    registerOutAdapters();
+    registerServices();
+}
+
+function registerOutAdapters() {
     container.register(
         "LoggerPort",
         { useClass: LoggerAdapter },
@@ -32,8 +36,9 @@ export function config() {
         { useClass: TextEditorAdapter },
         { lifecycle: Lifecycle.Singleton },
     );
+}
 
-    // Register services
+function registerServices() {
     container.register(
         "InitWebviewUseCase",
         { useClass: InitWebviewService },

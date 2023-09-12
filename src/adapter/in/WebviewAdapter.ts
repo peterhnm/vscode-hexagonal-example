@@ -1,7 +1,7 @@
 import { TextDocument, Uri, Webview } from "vscode";
 import { inject, injectable } from "tsyringe";
 
-import { MessageType } from "common/webview";
+import { MessageType, WebviewMessage } from "common/webview";
 import {
     EXTENSION_CONTEXT,
     setUpdateFrom,
@@ -37,7 +37,7 @@ export class WebviewAdapter {
 
     private onDidReceiveMessage(webview: Webview, document: TextDocument) {
         // Sync webview with a document
-        webview.onDidReceiveMessage(async (message) => {
+        webview.onDidReceiveMessage(async (message: WebviewMessage<string>) => {
             if (updateFrom === UpdateFrom.DOCUMENT) {
                 setUpdateFrom(UpdateFrom.NULL);
                 return;

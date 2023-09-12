@@ -23,6 +23,11 @@ textarea.addEventListener("input", (event) => {
 
 app?.appendChild(textarea);
 
+const state = vscode.getState();
+if (state) {
+    textarea.value = state;
+}
+
 function postMessage(message: WebviewMessage<string>): void {
     vscode.postMessage(message);
 }

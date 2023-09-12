@@ -7,7 +7,7 @@ export interface SyncDocumentUseCase {
 export class SyncDocumentCommand {
     constructor(
         private readonly _fileName: string,
-        message: WebviewMessage<any>,
+        message: WebviewMessage<string>,
     ) {
         if (!(this.validate(/*message*/))) {
             throw new Error("Invalid message");
@@ -33,7 +33,7 @@ export class SyncDocumentCommand {
         return true;
     }
 
-    private mapMessageToContent(message: WebviewMessage<any>): void {
-        this._content = JSON.stringify(message.data);
+    private mapMessageToContent(message: WebviewMessage<string>): void {
+        this._content = message.data;
     }
 }

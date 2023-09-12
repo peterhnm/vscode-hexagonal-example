@@ -51,7 +51,7 @@ export class InitWebviewCommand {
         private readonly _webviewId: string,
         content: string,
     ) {
-        if (!this.validate(content)) {
+        if (!(this.validate(/*content*/))) {
             throw new Error("Invalid content");
         }
 
@@ -72,8 +72,8 @@ export class InitWebviewCommand {
         return this._webviewId;
     }
 
-    public validate(content: string): boolean {
-        return content.length > 0;
+    public validate(/*content: string*/): boolean {
+        return true;
     }
 
     private mapContentToMessage(data: string): any {

@@ -9,7 +9,7 @@ export class TextEditorCommand {
     private readonly _closedTextDocuments: string[];
 
     constructor(closedTextDocuments: string[]) {
-        if (!this.validate(closedTextDocuments)) {
+        if (!(this.validate(/*closedTextDocuments*/))) {
             throw new Error("Invalid closed editors");
         }
 
@@ -20,8 +20,8 @@ export class TextEditorCommand {
         return this._closedTextDocuments;
     }
 
-    private validate(closedTextDocuments: string[]): boolean {
-        return closedTextDocuments.length > 0;
+    private validate(/*closedTextDocuments: string[]*/): boolean {
+        return true;
     }
 
     /**

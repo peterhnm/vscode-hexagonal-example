@@ -30,6 +30,9 @@ export class TextEditorAdapter {
                     closedTextEditors.push(tab.input.uri.path);
                 }
             }
+            if (closedTextEditors.length === 0) {
+                return;
+            }
             const textEditorCommand = new TextEditorCommand(closedTextEditors);
             this.textEditorUseCase.close(textEditorCommand);
         });
