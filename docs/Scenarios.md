@@ -1,6 +1,6 @@
 # Scenarios
 
-![Component Diagram](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://github.com/peterhnm/vscode.hexagonagonal-example/blob/main/docs/Architecture.puml?raw=true)
+![Component Diagram](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://github.com/peterhnm/vscode-hexagonal-example/blob/main/docs/Architecture.puml?raw=true)
 
 ## Scenario 1: User opens a `.hexagon` file.
 

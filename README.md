@@ -75,7 +75,7 @@ As you can see in the diagram above, the application is divided into:
 * **Output-Adapters** are *"driven"* by our application to communicate with the outside world.
   In the case of a VS Code plugin, this is the VS Code API itself.
 
-**The application core, which contains the ports and services, does not depend on VS Code.**
+**The application core, which contains the ports and services, has no dependencies on the VS Code API.**
 
 * [Scenarios](docs/Scenarios.md)
 
