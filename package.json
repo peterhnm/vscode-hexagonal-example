@@ -42,15 +42,15 @@
         }
     },
     "scripts": {
-        "vscode:prepublish": "yarn run compile",
-        "compile": "tsc -p ./",
-        "pretest": "yarn run compile && yarn run lint",
-        "lint": "eslint src --ext ts",
-        "test": "node ./out/test/runTest.js",
-        "esbuild": "esbuild ./src/extension.ts --bundle --outfile=dist/main.js --external:vscode --format=cjs --platform=node",
-        "vite": "vite build --config src/webview/vite.config.js",
-        "build": "npm run esbuild -- --minify && npm run vite -- --minify esbuild",
-        "dev": "conc -c \"cyan,yellow\" \"npm run esbuild -- --sourcemap --watch\" \"npm run vite -- --sourcemap true --watch\""
+        "vscode:prepublish": "yarn compile",
+        "compile": "yarn tsc -p ./",
+        "pretest": "yarn compile && yarn lint",
+        "lint": "yarn eslint src --ext ts",
+        "test": "yarn node ./out/test/runTest.js",
+        "base:esbuild": "yarn esbuild ./src/extension.ts --bundle --outfile=dist/main.js --external:vscode --format=cjs --platform=node",
+        "base:vite": "yarn vite build --config src/webview/vite.config.js",
+        "build": "yarn base:esbuild --minify && yarn base:vite --minify esbuild",
+        "dev": "yarn conc -c \"cyan,yellow\" \"yarn base:esbuild --sourcemap --watch\" \"yarn base:vite --sourcemap true --watch\""
     },
     "devDependencies": {
         "@types/mocha": "^10.0.1",
