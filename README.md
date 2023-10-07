@@ -39,7 +39,7 @@ This project is a sample project for creating a VS Code plugin with a hexagonal 
 
 1. Clone the repository
    ```shell
-   https://github.com/peterhnm/vscode-hexagonal-example.git
+   git clone https://github.com/peterhnm/vscode-hexagonal-example.git
    ```
 2. Install dependencies
    ```shell
